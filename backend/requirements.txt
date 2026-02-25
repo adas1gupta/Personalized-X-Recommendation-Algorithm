@@ -3,3 +3,4 @@ uvicorn
 sqlalchemy
 strawberry-graphql[fastapi]
 psycopg2-binary
+python-dotenv
