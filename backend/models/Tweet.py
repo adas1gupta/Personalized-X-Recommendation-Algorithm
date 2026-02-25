@@ -1,11 +1,14 @@
+from sqlalchemy import Column, Integer, DateTime, String
 from datetime import datetime
+from config.database import Base        
 
 class Tweet:
-    def __init__(self):
-        self.tweet_id = tweet_id
-        self.author_id = author_id 
-        self.text = text 
-        self.media_url = media_url
-        self.parent_tweet_id = parent_tweet_id
-        self.created_at = datetime.now()
+    __tablename__ = "tweets"
+
+    tweet_id = Column(Integer, primary_key=True)
+    author_id = Column(Integer, ForeignKey("users.user_id"))
+    text = Column(String)
+    media_url = Column(String)
+    parent_tweet_id = Column(Integer, ForeignKey("tweets.tweet_id"))
+    created_at = Column(DateTime, default=datetime.now)
         

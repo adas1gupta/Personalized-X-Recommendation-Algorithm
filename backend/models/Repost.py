@@ -1,8 +1,13 @@
+from sqlalchemy import Column, Integer, DateTime
 from datetime import datetime
+from config.database import Base
 
-class Repost:
-    def __init__(self):
-        self.user_id = user_id
-        self.tweet_id = tweet_id
-        self.created_at = datetime.now()
+## Composite key of (user_id, tweet_id)
+
+class Repost(Base):
+    __tablename__ = "reposts"
+    
+    user_id = Column(Integer, ForeignKey("users.user_id"), primary_key=True)
+    tweet_id = tweet_id = Column(Integer, ForeignKey("tweets.tweet_id"), primary_key=True)
+    created_at = Column(DateTime, default=datetime.now)
         

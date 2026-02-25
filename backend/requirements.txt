@@ -2,4 +2,4 @@ fastapi
 uvicorn
 sqlalchemy
 strawberry-graphql[fastapi]
-psycopg2-bonary
+psycopg2-binary
