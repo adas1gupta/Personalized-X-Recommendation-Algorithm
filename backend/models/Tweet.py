@@ -1,8 +1,8 @@
-from sqlalchemy import Column, Integer, DateTime, String
+from sqlalchemy import Column, Integer, DateTime, String, ForeignKey
 from datetime import datetime
 from config.database import Base        
 
-class Tweet:
+class Tweet(Base):
     __tablename__ = "tweets"
 
     tweet_id = Column(Integer, primary_key=True)
