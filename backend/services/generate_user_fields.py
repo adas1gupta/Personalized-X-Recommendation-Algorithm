@@ -2,6 +2,7 @@ import os
 import json
 from openai import OpenAI
 from models.User import User 
+from models.Interest import Interest
 from config.database import SessionLocal
 
 client = OpenAI(api_key=os.environ["LLM_KEY"])
@@ -15,10 +16,11 @@ response = client.responses.create(
         Generate 20 random usernames. 
         Generate 20 random passwords.
         Generate 20 random bios.
+        Generate any number of social media interests from 1 to 5 randomly.  
         After you've finished generating all of this, return a list of JSON objects in the form of:
         \'
-        [{"email": first_email, "username": first_username, "password": first_password, "bio": first_bio}, 
-        {"email": second_email, "username": second_username, "password": second_password, "bio": second_bio}, and so on]
+        [{"email": first_email, "username": first_username, "password": first_password, "bio": first_bio, "interests": [first_user_interests]}, 
+        {"email": second_email, "username": second_username, "password": second_password, "bio": second_bio, "interests": [second_user_interests]}, and so on]
         '
         """
     )
@@ -37,8 +39,19 @@ for u_id in range(20):
         profile_picture=profile_picture,
         bio=current_user["bio"]
     )
-
+    
     db.add(new_user)
+
+    current_interests = current_user["interests"]
+    for interest in current_interests:
+        new_interest = Interest(
+            user_id=user_id,
+            interest=interest
+        )
+
+        db.add(new_interest)
+
+    
 
 try:
     db.commit()
