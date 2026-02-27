@@ -9,7 +9,7 @@ class User(Base):
     email = Column(String)
     username = Column(String) 
     password = Column(String) 
-    profile_picture = Column(String)
+    profile_picture = Column(String) # URL to S3/Object Storage
     bio = Column(String, default="")
     pinned_tweet_id = Column(Integer, ForeignKey("tweets.tweet_id"))
     created_at = Column(DateTime, default=datetime.now)
